@@ -7,14 +7,16 @@ const PAPER = "paper";
 const SCISSORS = "scissors";
 const possibleMoveArray = [ROCK, PAPER, SCISSORS];
 
+let scoreBoardIsUp = false;
 let currentRound = 0;
 let playerWins = 0;
 let computerWins = 0;
 let tieCount = 0;
 
-startGame()
+startGame();
 
 function startGame() {
+    scoreBoardIsUp = false;
     currentRound = 0;
     playerWins = 0;
     computerWins = 0;
@@ -27,45 +29,45 @@ function getComputerChoice() {
     let randNumber = Math.random() * 3;
     randNumber = Math.ceil(randNumber);
 
-    return possibleMoveArray[randNumber - 1]
+    return possibleMoveArray[randNumber - 1];
 }
 
 function gameButtons () {
     const containerBtn = document.createElement("div");
-    containerBtn.setAttribute('class', 'container-btns')
+    containerBtn.setAttribute('class', 'container-btns');
     container.appendChild(containerBtn);
 
     const rockBtn = document.createElement("button");
     rockBtn.id = "rock";
     rockBtn.textContent = "Rock";
     rockBtn.addEventListener('click', () =>{
-        playRound("rock")
-    })
+        playRound("rock");
+    });
 
     const paperBtn = document.createElement("button");
     paperBtn.id = "paper";
     paperBtn.textContent = "Paper";
     paperBtn.addEventListener('click', () =>{
-        playRound("paper")
-    })
+        playRound("paper");
+    });
 
     const scissorsBtn = document.createElement("button");
     scissorsBtn.id = "scissors";
     scissorsBtn.textContent = "Scissors";
     scissorsBtn.addEventListener('click', () =>{
-        playRound("scissors")
-    })
+        playRound("scissors");
+    });
 
     containerBtn.appendChild(rockBtn);
     containerBtn.appendChild(paperBtn);
     containerBtn.appendChild(scissorsBtn);
-};
+}
 
 function scoreBoard() {
     container.textContent = "";
     const h1Board = document.createElement("h1");
     h1Board.setAttribute("class", "scxxxore-board");
-    h1Board.textContent = "Game: Rock-Paper-Scissors"
+    h1Board.textContent = "Game: Rock-Paper-Scissors";
 
     const scoreBoard = document.createElement("div");
     scoreBoard.setAttribute("class", "score-board");
@@ -75,48 +77,49 @@ function scoreBoard() {
 
     const playerScoreTitle = document.createElement("div");
     playerScoreTitle.setAttribute("class", "score-title");
-    playerScoreTitle.textContent = "Player"
+    playerScoreTitle.textContent = "Player";
 
     const playerScoreValue = document.createElement("div");
     playerScoreValue.setAttribute("class", "score-value");
-    playerScoreValue.textContent = "0"
+    playerScoreValue.textContent = "0";
 
     const vsLabel = document.createElement("div");
     vsLabel.setAttribute("class", "vs-box");
-    vsLabel.textContent = "VS"
+    vsLabel.textContent = "VS";
 
     const computerScoreBox = document.createElement("div");
     computerScoreBox.setAttribute("class", "score-box");
 
     const computerScoreTitle = document.createElement("div");
     computerScoreTitle.setAttribute("class", "score-title");
-    computerScoreTitle.textContent = "Computer"
+    computerScoreTitle.textContent = "Computer";
 
     const computerScoreValue = document.createElement("div");
     computerScoreValue.setAttribute("class", "score-value");
-    computerScoreValue.textContent = "0"
+    computerScoreValue.textContent = "0";
 
-    container.appendChild(h1Board)
+    container.appendChild(h1Board);
     container.appendChild(scoreBoard);
 
-    scoreBoard.append(playerScoreBox)
-    playerScoreBox.appendChild(playerScoreTitle)
-    playerScoreBox.appendChild(playerScoreValue)
+    scoreBoard.append(playerScoreBox);
+    playerScoreBox.appendChild(playerScoreTitle);
+    playerScoreBox.appendChild(playerScoreValue);
 
-    scoreBoard.appendChild(vsLabel)
+    scoreBoard.appendChild(vsLabel);
 
-    scoreBoard.append(computerScoreBox)
-    computerScoreBox.appendChild(computerScoreTitle)
-    computerScoreBox.appendChild(computerScoreValue)
+    scoreBoard.append(computerScoreBox);
+    computerScoreBox.appendChild(computerScoreTitle);
+    computerScoreBox.appendChild(computerScoreValue);
 }
 
 function playRound(playerSelection) {
     let computerSelection = getComputerChoice();
 
-    if (currentRound === 0) {
+    if (!scoreBoardIsUp) {
+        scoreBoardIsUp = true;
         const noticeArea = document.createElement("div");
         noticeArea.setAttribute('class', "notice-area");
-        container.appendChild(noticeArea)
+        container.appendChild(noticeArea);
     }
 
     const noticeArea = document.querySelector(".notice-area");
@@ -135,13 +138,13 @@ function playRound(playerSelection) {
         (playerSelection === SCISSORS && computerSelection === PAPER)) {
         const scoreValues  = document.querySelectorAll(".score-value");
         const playerScoreValue = scoreValues[0];
-        playerScoreValue.textContent = ++playerWins
+        playerScoreValue.textContent = ++playerWins;
 
         msg = `Player Wins: ${explanation}\n`;
     } else {
         const scoreValues  = document.querySelectorAll(".score-value");
         const computerScoreValue = scoreValues[1];
-        computerScoreValue.textContent = ++computerWins
+        computerScoreValue.textContent = ++computerWins;
 
         msg = `Computer Wins: ${explanation}\n`;
     }
@@ -176,15 +179,16 @@ function gameResults() {
     btns1.setAttribute("disabled", "disabled");
     btns2.setAttribute("disabled", "disabled");
     btns3.setAttribute("disabled", "disabled");
-    btns1.setAttribute('class', "button-disabled")
-    btns2.setAttribute('class', "button-disabled")
-    btns3.setAttribute('class', "button-disabled")
+    btns1.setAttribute('class', "button-disabled");
+    btns2.setAttribute('class', "button-disabled");
+    btns3.setAttribute('class', "button-disabled");
 
     const gameResultContainer = document.createElement('div');
-    gameResultContainer.setAttribute('class', "game-results")
+    gameResultContainer.setAttribute('class', "game-results");
     container.appendChild(gameResultContainer);
 
     const img = document.createElement("img");
+    img.setAttribute('alt', 'player icon image');
     if (computerWins > playerWins) {
         img.src = "https://img.icons8.com/?size=80&id=GBu1KXnCZZ8j&format=png";
     } else {
@@ -200,8 +204,8 @@ function gameResults() {
     score1.textContent = `Player won ${playerWins} rounds`;
     const score2 = document.createElement("p");
     score2.textContent = `Computer won ${computerWins}  rounds`;
-    gameResultContainer.appendChild(score1)
-    gameResultContainer.appendChild(score2)
+    gameResultContainer.appendChild(score1);
+    gameResultContainer.appendChild(score2);
 
     // if (tieCount > 0) {
     //     const tie = document.createElement("p");
@@ -213,17 +217,17 @@ function gameResults() {
     playAgain.textContent =  "Play again";
     playAgain.addEventListener('click', () => {
         startGame();
-    })
+    });
     gameResultContainer.append(playAgain);
 
-    const scoreBoxes = document.querySelectorAll('.score-box')
+    const scoreBoxes = document.querySelectorAll('.score-box');
     if (computerWins > playerWins) {
-        container.classList.add("robot-cursor")
-        scoreBoxes[1].style = "background-color: #00ff00;"
-        scoreBoxes[0].style = "background-color: #ff6347;"
+        container.classList.add("robot-cursor");
+        scoreBoxes[1].style = "background-color: #00ff00;";
+        scoreBoxes[0].style = "background-color: #ff6347;";
     } else {
-        container.classList.add("player-cursor")
-        scoreBoxes[0].style = "background-color: #00ff00;"
-        scoreBoxes[1].style = "background-color: #ff6347;"
+        container.classList.add("player-cursor");
+        scoreBoxes[0].style = "background-color: #00ff00;";
+        scoreBoxes[1].style = "background-color: #ff6347;";
     }
 }
