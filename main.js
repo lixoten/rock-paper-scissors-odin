@@ -134,13 +134,13 @@ function playRound(playerSelection) {
         (playerSelection === PAPER && computerSelection === ROCK) ||
         (playerSelection === SCISSORS && computerSelection === PAPER)) {
         const scoreValues  = document.querySelectorAll(".score-value");
-        const playerScoreValue = scoreValues[0]; // Access the second element
+        const playerScoreValue = scoreValues[0];
         playerScoreValue.textContent = ++playerWins
 
         msg = `Player Wins: ${explanation}\n`;
     } else {
         const scoreValues  = document.querySelectorAll(".score-value");
-        const computerScoreValue = scoreValues[1]; // Access the second element
+        const computerScoreValue = scoreValues[1];
         computerScoreValue.textContent = ++computerWins
 
         msg = `Computer Wins: ${explanation}\n`;
