@@ -21,4 +21,4 @@ This project is a simple yet engaging implementation of the classic game Rock Pa
 * **Project Structure:** Developed a better understanding of how to structure a web project, including separating concerns between HTML, CSS, and JavaScript files.
 * **Debugging and Testing:** Practiced debugging and testing to ensure the game works as expected and is accessible to all users.
 
-<img src="screenshot.gif" alt="screenshot video">
+<img src="screenshot1.gif" alt="screenshot video">
